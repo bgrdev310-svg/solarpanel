@@ -15,21 +15,27 @@ const NavBar = () => {
             const currentScrollY = window.scrollY;
             setIsAtTop(currentScrollY < 20);
 
+            let action = '';
             if (currentScrollY < 10) {
+                action = 'top';
                 setVisible(true);
                 clearTimeout(timeoutId);
             } else if (currentScrollY > lastScrollY) {
+                action = 'down';
                 setVisible(false);
                 clearTimeout(timeoutId);
             } else {
+                action = 'up';
                 setVisible(true);
                 clearTimeout(timeoutId);
                 
                 const waitTime = window.innerWidth > 768 ? 1800 : 1100;
                 timeoutId = setTimeout(() => {
+                    console.log('timeout triggered, hiding');
                     setVisible(false);
                 }, waitTime);
             }
+            console.log(`Scroll Event - current: ${currentScrollY}, last: ${lastScrollY}, action: ${action}`);
             lastScrollY = currentScrollY;
         };
 

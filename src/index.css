@@ -297,8 +297,8 @@ body {
 .michroma-title {
   font-family: 'Michroma', sans-serif;
   color: #fff;
-  font-size: 42px;
-  font-size: clamp(26px, 3.5vw, 42px);
+  font-size: 40px;
+  font-size: clamp(26px, 3.4vw, 40px);
   line-height: 1.2;
   text-transform: uppercase;
   white-space: normal;
@@ -436,7 +436,7 @@ body {
 .hero-bento {
   position: relative;
   width: 100%;
-  aspect-ratio: 1200 / 420;
+  aspect-ratio: 1200 / 380;
   min-height: 300px;
   background-image: url("/heroimg.png");
   background-size: auto 100%;
@@ -447,10 +447,10 @@ body {
   overflow: hidden;
 }
 
-@supports not (aspect-ratio: 1200 / 420) {
+@supports not (aspect-ratio: 1200 / 380) {
   .hero-bento {
     height: 0;
-    padding-bottom: 35%;
+    padding-bottom: 31.66%;
     min-height: auto;
   }
 }

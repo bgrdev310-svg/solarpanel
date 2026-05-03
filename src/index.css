@@ -297,8 +297,8 @@ body {
 .michroma-title {
   font-family: 'Michroma', sans-serif;
   color: #fff;
-  font-size: 40px;
-  font-size: clamp(26px, 3.4vw, 40px);
+  font-size: 42px; /* Fallback for browsers without clamp */
+  font-size: clamp(26px, 3.5vw, 42px);
   line-height: 1.2;
   text-transform: uppercase;
   white-space: normal;
@@ -307,6 +307,13 @@ body {
   -webkit-text-stroke: 1px #fff;
   /* Artificially thicken Michroma */
   letter-spacing: 1px;
+}
+
+@media (min-width: 1400px) {
+  .michroma-title {
+    font-size: 38px !important;
+    letter-spacing: 0px !important;
+  }
 }
 
 .subheadline {
@@ -436,7 +443,7 @@ body {
 .hero-bento {
   position: relative;
   width: 100%;
-  aspect-ratio: 1200 / 380;
+  aspect-ratio: 1200 / 420;
   min-height: 300px;
   background-image: url("/heroimg.png");
   background-size: auto 100%;
@@ -447,10 +454,10 @@ body {
   overflow: hidden;
 }
 
-@supports not (aspect-ratio: 1200 / 380) {
+@supports not (aspect-ratio: 1200 / 420) {
   .hero-bento {
     height: 0;
-    padding-bottom: 31.66%;
+    padding-bottom: 35%;
     min-height: auto;
   }
 }
@@ -485,8 +492,8 @@ body {
 
 .hero-status-pill {
   position: absolute;
-  bottom: 24px;
-  right: 24px;
+  bottom: 6%;
+  right: 2%;
   gap: 14px;
   z-index: 4;
 }

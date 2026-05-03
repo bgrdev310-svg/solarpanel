@@ -309,10 +309,12 @@ body {
   letter-spacing: 1px;
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .michroma-title {
-    font-size: 38px !important;
-    letter-spacing: 0px !important;
+    font-size: 34px !important;
+    letter-spacing: -1px !important;
+    transform: scaleX(0.95);
+    transform-origin: left center;
   }
 }
 

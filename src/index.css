@@ -457,16 +457,16 @@ body {
 .hero-title-top {
   position: absolute;
   top: 7%;
-  left: 3%;
-  max-width: 48%;
+  left: 2%;
+  max-width: 60%;
   z-index: 2;
 }
 
 .hero-title-bottom {
   position: absolute;
   top: 25%;
-  left: 3%;
-  max-width: 48%;
+  left: 2%;
+  max-width: 60%;
   z-index: 2;
 }
 

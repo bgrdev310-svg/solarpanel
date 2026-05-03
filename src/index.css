@@ -297,7 +297,7 @@ body {
 .michroma-title {
   font-family: 'Michroma', sans-serif;
   color: #fff;
-  font-size: 42px; /* Fallback for browsers without clamp */
+  font-size: 3.5vw; /* Responsive fallback for older browsers without clamp */
   font-size: clamp(26px, 3.5vw, 42px);
   line-height: 1.2;
   text-transform: uppercase;
@@ -307,6 +307,14 @@ body {
   -webkit-text-stroke: 1px #fff;
   /* Artificially thicken Michroma */
   letter-spacing: 1px;
+}
+
+/* Cap the fallback for large screens */
+@media (min-width: 1200px) {
+  .michroma-title {
+    font-size: 42px;
+    font-size: clamp(26px, 3.5vw, 42px);
+  }
 }
 
 @media (min-width: 1920px) {

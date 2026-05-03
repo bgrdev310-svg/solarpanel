@@ -297,6 +297,7 @@ body {
 .michroma-title {
   font-family: 'Michroma', sans-serif;
   color: #fff;
+  font-size: 42px;
   font-size: clamp(26px, 3.5vw, 42px);
   line-height: 1.2;
   text-transform: uppercase;
@@ -438,8 +439,8 @@ body {
   aspect-ratio: 1200 / 420;
   min-height: 300px;
   background-image: url("/heroimg.png");
-  background-size: 100% 100%;
-  background-position: center;
+  background-size: auto 100%;
+  background-position: right center;
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: var(--radius-lg);
@@ -484,8 +485,8 @@ body {
 
 .hero-status-pill {
   position: absolute;
-  bottom: 6%;
-  right: 2%;
+  bottom: 24px;
+  right: 24px;
   gap: 14px;
   z-index: 4;
 }

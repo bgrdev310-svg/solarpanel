@@ -494,10 +494,18 @@ body {
   display: block;
 }
 
+/* Explicit text wrapping controls */
+.mobile-break {
+  display: none;
+}
+.desktop-break {
+  display: block;
+}
+
 /* ========================================
-   RESPONSIVE DESIGN - TABLET (≤768px)
+   RESPONSIVE DESIGN - TABLET (≤1024px)
    ======================================== */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   body {
     padding: 1rem;
   }
@@ -634,15 +642,136 @@ body {
 
   /* ===== HOME PAGE COMPONENTS ===== */
 
-  /* Hero Section */
-
-  .hero-content-area {
-    width: 60% !important;
+  .mobile-break {
+    display: block !important;
+  }
+  .desktop-break {
+    display: none !important;
   }
 
-  .subheadline {
-    font-size: 14px;
-    max-width: 300px;
+  /* Hero Section - Tablet (Premium Integrated Layout) */
+  .hero-bento {
+    height: auto !important;
+    aspect-ratio: unset !important;
+    min-height: 600px !important; /* Tall enough for the house and text */
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    
+    /* Integrated Background Image */
+    background-image: url("/heroimg2.png") !important;
+    background-size: cover !important;
+    background-position: center bottom !important;
+    background-repeat: no-repeat !important;
+    
+    border: 1px solid rgba(0, 212, 255, 0.15) !important;
+    border-radius: 32px !important;
+    overflow: hidden !important;
+    
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 56px 48px !important; /* Padding for the text */
+    gap: 0 !important;
+    
+    /* Subtle vignette at the bottom for the pill */
+    box-shadow: 0 10px 40px -10px rgba(0, 212, 255, 0.1), inset 0 -100px 100px -50px rgba(0,0,0,0.6) !important;
+    position: relative !important;
+  }
+
+  /* We remove the mobile break on tablet so text flows natively */
+  .mobile-break {
+    display: none !important;
+  }
+
+  .hero-title-top,
+  .hero-title-bottom,
+  .hero-content-area {
+    position: static !important;
+    transform: none !important;
+    text-align: left !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero-title-top h1, 
+  .hero-title-bottom h1 {
+    font-family: 'Michroma', sans-serif !important;
+    font-size: 42px !important;
+    letter-spacing: 0px !important;
+    -webkit-text-stroke: 0px !important;
+    line-height: 1.1 !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8) !important; /* Better readability */
+  }
+
+  .hero-title-top {
+      margin-bottom: 8px !important;
+  }
+
+  .hero-title-bottom {
+      margin-bottom: 24px !important;
+  }
+
+  .hero-content-area {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .hero-content-area .subheadline {
+    margin-bottom: 0 !important;
+    max-width: 75% !important;
+    text-align: left !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #ffffff !important;
+    opacity: 0.9 !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;
+  }
+
+  /* Show desktop button inline with text on Tablet */
+  .desktop-cta {
+    display: block !important;
+    margin-top: 32px !important;
+    padding: 14px 40px !important;
+    font-size: 16px !important;
+  }
+
+  /* Hide the stacked bottom button on Tablet */
+  .mobile-cta {
+    display: none !important;
+  }
+
+  /* Hide the separate image element since it's now the background */
+  .hero-mobile-image-container {
+    display: none !important;
+  }
+
+  /* Floating Stats Pill - Anchored to bottom right of the card */
+  .hero-status-pill {
+    position: absolute !important;
+    bottom: 32px !important; 
+    right: 32px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 14px 28px !important;
+    background: rgba(15, 16, 17, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 100px !important;
+    z-index: 10 !important;
+    width: auto !important;
+  }
+
+  .hero-status-pill > .flex-row {
+    margin-left: 0 !important; 
   }
 
   /* Feature Cards */
@@ -850,9 +979,18 @@ body {
 
   /* ===== HOME PAGE COMPONENTS MOBILE ===== */
 
+  .mobile-break {
+    display: block !important;
+  }
+  .desktop-break {
+    display: none !important;
+  }
+
   /* Hero Section Mobile */
   .hero-bento {
     height: auto !important;
+    aspect-ratio: unset !important;
+    min-height: unset !important;
     max-width: 350px !important;
     margin: 0 auto !important;
     background: linear-gradient(135deg, rgba(20, 25, 30, 0.6) 0%, rgba(10, 12, 15, 0.4) 100%) !important;
@@ -878,6 +1016,7 @@ body {
     transform: none !important;
     text-align: center !important;
     width: 100% !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }

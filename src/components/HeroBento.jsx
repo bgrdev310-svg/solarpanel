@@ -9,7 +9,7 @@ const HeroBento = () => {
 
             {/* POWER YOUR HOME */}
             <div className="hero-title-top">
-                <h1 className="michroma-title" style={{ margin: 0 }}>POWER YOUR HOME</h1>
+                <h1 className="michroma-title" style={{ margin: 0 }}>POWER YOUR<br className="mobile-break" /> HOME</h1>
             </div>
 
             {/* WITH THE SUN */}

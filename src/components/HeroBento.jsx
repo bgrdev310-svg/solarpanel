@@ -48,7 +48,7 @@ const HeroBento = () => {
                     </div>
                 </div>
                 <div className="flex-col" style={{ gap: '2px', marginLeft: '12px', textAlign: 'left' }}>
-                    <span style={{ fontWeight: 700, fontSize: '18px', color: '#fff', lineHeight: 1 }}>100k+</span>
+                    <span style={{ fontWeight: 700, fontSize: '18px', color: '#fff', lineHeight: 1 }}>100+</span>
                     <span style={{ fontSize: '13px', color: 'var(--element-dim)', lineHeight: 1 }}>Texas Clients</span>
                 </div>
             </div>

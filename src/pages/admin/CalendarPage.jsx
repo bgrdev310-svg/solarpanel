@@ -4,30 +4,31 @@ import { ChevronLeft, ChevronRight, Plus, Clock, MapPin, User } from 'lucide-rea
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const dates = Array.from({ length: 35 }, (_, i) => i - 3);
+
+const events = {
+  5: [{ time: '09:00', client: 'J. Smith', type: 'Installation', color: '#6366f1' }],
+  12: [
+    { time: '10:00', client: 'S. Davis', type: 'Site Survey', color: '#22c55e' },
+    { time: '14:00', client: 'M. Chen', type: 'Installation', color: '#6366f1' },
+  ],
+  15: [{ time: 'Full Day', client: 'Commercial Site B', type: 'Large Install', color: '#3b82f6' }],
+  18: [{ time: '11:00', client: 'E. White', type: 'Maintenance', color: '#f59e0b' }],
+  22: [{ time: '09:30', client: 'K. Williams', type: 'Battery Setup', color: '#8b5cf6' }],
+  25: [{ time: '13:00', client: 'L. Johnson', type: 'Consultation', color: '#06b6d4' }],
+};
+
+const upcomingEvents = [
+  { date: 'Oct 5', time: '09:00 AM', client: 'J. Smith', type: 'Installation', address: '456 Oak St', color: '#6366f1' },
+  { date: 'Oct 12', time: '10:00 AM', client: 'S. Davis', type: 'Site Survey', address: '789 Pine Ave', color: '#22c55e' },
+  { date: 'Oct 15', time: 'Full Day', client: 'Commercial Site B', type: 'Large Install', address: '100 Business Pkwy', color: '#3b82f6' },
+  { date: 'Oct 18', time: '11:00 AM', client: 'E. White', type: 'Maintenance', address: '555 Cedar Ln', color: '#f59e0b' },
+];
+
 const CalendarPage = () => {
   const [currentMonth] = useState('October 2026');
   const [activeView, setActiveView] = useState('Month');
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const dates = Array.from({ length: 35 }, (_, i) => i - 3);
-
-  const events = {
-    5: [{ time: '09:00', client: 'J. Smith', type: 'Installation', color: '#6366f1' }],
-    12: [
-      { time: '10:00', client: 'S. Davis', type: 'Site Survey', color: '#22c55e' },
-      { time: '14:00', client: 'M. Chen', type: 'Installation', color: '#6366f1' },
-    ],
-    15: [{ time: 'Full Day', client: 'Commercial Site B', type: 'Large Install', color: '#3b82f6' }],
-    18: [{ time: '11:00', client: 'E. White', type: 'Maintenance', color: '#f59e0b' }],
-    22: [{ time: '09:30', client: 'K. Williams', type: 'Battery Setup', color: '#8b5cf6' }],
-    25: [{ time: '13:00', client: 'L. Johnson', type: 'Consultation', color: '#06b6d4' }],
-  };
-
-  const upcomingEvents = [
-    { date: 'Oct 5', time: '09:00 AM', client: 'J. Smith', type: 'Installation', address: '456 Oak St', color: '#6366f1' },
-    { date: 'Oct 12', time: '10:00 AM', client: 'S. Davis', type: 'Site Survey', address: '789 Pine Ave', color: '#22c55e' },
-    { date: 'Oct 15', time: 'Full Day', client: 'Commercial Site B', type: 'Large Install', address: '100 Business Pkwy', color: '#3b82f6' },
-    { date: 'Oct 18', time: '11:00 AM', client: 'E. White', type: 'Maintenance', address: '555 Cedar Ln', color: '#f59e0b' },
-  ];
 
   return (
     <motion.div initial="initial" animate="animate" transition={{ staggerChildren: 0.08 }} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>

@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Search, Bell, Menu, Moon, Sun, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const notifications = [
+  { id: 1, text: 'New installation request from John Smith', time: '2 min ago', unread: true },
+  { id: 2, text: 'Schedule confirmed for Oct 15', time: '1 hour ago', unread: true },
+  { id: 3, text: 'FAQ section updated successfully', time: '3 hours ago', unread: false },
+];
+
 const TopNavbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
-
-  const notifications = [
-    { id: 1, text: 'New installation request from John Smith', time: '2 min ago', unread: true },
-    { id: 2, text: 'Schedule confirmed for Oct 15', time: '1 hour ago', unread: true },
-    { id: 3, text: 'FAQ section updated successfully', time: '3 hours ago', unread: false },
-  ];
 
   return (
     <div className="admin-topbar">

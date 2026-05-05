@@ -11,6 +11,13 @@ const tabs = [
   { id: 'general', icon: <Globe size={18} />, label: 'General' },
 ];
 
+const notificationSettings = [
+  { label: 'New request received', desc: 'Get notified when a client submits a request', checked: true },
+  { label: 'Daily schedule reminder', desc: 'Receive morning reminders for the day ahead', checked: true },
+  { label: 'Installation completed', desc: 'Be alerted when a job is marked done', checked: true },
+  { label: 'Weekly analytics report', desc: 'Summary email every Monday', checked: false },
+];
+
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState('profile');
 
@@ -104,12 +111,7 @@ const SettingsPage = () => {
           {activeTab === 'notifications' && (
             <div className="admin-card">
               <h2 className="admin-card-title" style={{ marginBottom: 24 }}>Notification Preferences</h2>
-              {[
-                { label: 'New request received', desc: 'Get notified when a client submits a request', checked: true },
-                { label: 'Daily schedule reminder', desc: 'Receive morning reminders for the day ahead', checked: true },
-                { label: 'Installation completed', desc: 'Be alerted when a job is marked done', checked: true },
-                { label: 'Weekly analytics report', desc: 'Summary email every Monday', checked: false },
-              ].map((n, i) => (
+              {notificationSettings.map((n, i) => (
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 0', borderBottom: i < 3 ? '1px solid var(--admin-border)' : 'none' }}>
                   <div>
                     <div style={{ fontWeight: 600, fontSize: '0.92rem' }}>{n.label}</div>

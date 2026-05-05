@@ -4,6 +4,25 @@ import { Save, Phone, Mail, MapPin, Clock, Share2, Link, Globe } from 'lucide-re
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
+const primaryContacts = [
+  { icon: <Phone size={18} />, label: 'Mobile Number', value: '+1 (555) 123-4567', color: '#22c55e' },
+  { icon: <Mail size={18} />, label: 'Email Address', value: 'hello@solarpanel.com', color: '#3b82f6' },
+  { icon: <Clock size={18} />, label: 'Working Hours', value: 'Mon - Fri: 9:00 AM - 6:00 PM', color: '#f59e0b' },
+];
+
+const socialMedia = [
+  { icon: <Link size={18} />, label: 'Instagram', value: '@solarpanel_official', color: '#e1306c' },
+  { icon: <Share2 size={18} />, label: 'Facebook', value: 'facebook.com/solarpanel', color: '#1877f2' },
+  { icon: <Phone size={18} />, label: 'WhatsApp', value: '+1 (555) 123-4567', color: '#25d366' },
+];
+
+const publicPreview = [
+  { icon: <Phone size={14} />, text: '+1 (555) 123-4567' },
+  { icon: <Mail size={14} />, text: 'hello@solarpanel.com' },
+  { icon: <MapPin size={14} />, text: '123 Solar Way, Cityville' },
+  { icon: <Clock size={14} />, text: 'Mon-Fri 9AM-6PM' },
+];
+
 const ContactManager = () => {
   return (
     <motion.div initial="initial" animate="animate" transition={{ staggerChildren: 0.08 }}>
@@ -19,11 +38,7 @@ const ContactManager = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div className="admin-card">
             <h2 className="admin-card-title" style={{ marginBottom: 20 }}>Primary Contact</h2>
-            {[
-              { icon: <Phone size={18} />, label: 'Mobile Number', value: '+1 (555) 123-4567', color: '#22c55e' },
-              { icon: <Mail size={18} />, label: 'Email Address', value: 'hello@solarpanel.com', color: '#3b82f6' },
-              { icon: <Clock size={18} />, label: 'Working Hours', value: 'Mon - Fri: 9:00 AM - 6:00 PM', color: '#f59e0b' },
-            ].map((f, i) => (
+            {primaryContacts.map((f, i) => (
               <div key={i} className="admin-form-group">
                 <label className="admin-label">{f.label}</label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--admin-border)', borderRadius: 10, padding: '10px 16px', transition: 'var(--admin-transition)' }}>
@@ -43,11 +58,7 @@ const ContactManager = () => {
 
           <div className="admin-card">
             <h2 className="admin-card-title" style={{ marginBottom: 20 }}>Social Media</h2>
-            {[
-              { icon: <Link size={18} />, label: 'Instagram', value: '@solarpanel_official', color: '#e1306c' },
-              { icon: <Share2 size={18} />, label: 'Facebook', value: 'facebook.com/solarpanel', color: '#1877f2' },
-              { icon: <Phone size={18} />, label: 'WhatsApp', value: '+1 (555) 123-4567', color: '#25d366' },
-            ].map((f, i) => (
+            {socialMedia.map((f, i) => (
               <div key={i} className="admin-form-group">
                 <label className="admin-label">{f.label}</label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--admin-border)', borderRadius: 10, padding: '10px 16px' }}>
@@ -78,12 +89,7 @@ const ContactManager = () => {
             </div>
             <div style={{ borderRadius: 12, background: 'linear-gradient(160deg, #0a0c1a, #1a1035)', padding: 24, border: '1px solid var(--admin-border)' }}>
               <div style={{ fontWeight: 800, fontSize: '1.1rem', marginBottom: 16 }}>Contact Us</div>
-              {[
-                { icon: <Phone size={14} />, text: '+1 (555) 123-4567' },
-                { icon: <Mail size={14} />, text: 'hello@solarpanel.com' },
-                { icon: <MapPin size={14} />, text: '123 Solar Way, Cityville' },
-                { icon: <Clock size={14} />, text: 'Mon-Fri 9AM-6PM' },
-              ].map((item, i) => (
+              {publicPreview.map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10, fontSize: '0.85rem', color: 'var(--admin-text-secondary)' }}>
                   <span style={{ color: '#6366f1' }}>{item.icon}</span>
                   {item.text}

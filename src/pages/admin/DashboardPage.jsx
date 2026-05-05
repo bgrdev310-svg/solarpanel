@@ -13,35 +13,35 @@ const fadeUp = {
   animate: { opacity: 1, y: 0 },
 };
 
+const stats = [
+  { label: 'Total Requests', value: '124', trend: '+12%', positive: true, icon: <FileText size={22} />, gradient: 'var(--admin-gradient-1)', color: '#6366f1' },
+  { label: 'Pending Requests', value: '18', trend: '3 urgent', positive: false, icon: <Clock size={22} />, gradient: 'var(--admin-gradient-3)', color: '#f43f5e' },
+  { label: 'Installations', value: '45', trend: '+5%', positive: true, icon: <CheckSquare size={22} />, gradient: 'var(--admin-gradient-4)', color: '#22c55e' },
+  { label: 'Revenue', value: '$48.2k', trend: '+18%', positive: true, icon: <DollarSign size={22} />, gradient: 'var(--admin-gradient-2)', color: '#3b82f6' },
+];
+
+const recentRequests = [
+  { name: 'John Smith', service: 'Residential Solar', date: 'Oct 12, 2026', status: 'pending' },
+  { name: 'Sarah Davis', service: 'Commercial Panel', date: 'Oct 11, 2026', status: 'accepted' },
+  { name: 'Michael Chen', service: 'Battery Storage', date: 'Oct 10, 2026', status: 'completed' },
+  { name: 'Emily White', service: 'Maintenance', date: 'Oct 09, 2026', status: 'pending' },
+];
+
+const quickActions = [
+  { label: 'Schedule', icon: <Calendar size={24} />, color: '#6366f1', path: '/admin/calendar' },
+  { label: 'Edit Home', icon: <Edit size={24} />, color: '#22c55e', path: '/admin/homepage-manager' },
+  { label: 'Add FAQ', icon: <HelpCircle size={24} />, color: '#f59e0b', path: '/admin/faq-manager' },
+  { label: 'Contacts', icon: <Contact size={24} />, color: '#8b5cf6', path: '/admin/contact-manager' },
+];
+
+const upcomingSchedule = [
+  { time: '09:00 AM', client: 'J. Thompson', type: 'Installation', color: '#6366f1' },
+  { time: '11:30 AM', client: 'M. Rodriguez', type: 'Site Survey', color: '#22c55e' },
+  { time: '02:00 PM', client: 'K. Williams', type: 'Maintenance', color: '#f59e0b' },
+];
+
 const DashboardPage = () => {
   const navigate = useNavigate();
-
-  const stats = [
-    { label: 'Total Requests', value: '124', trend: '+12%', positive: true, icon: <FileText size={22} />, gradient: 'var(--admin-gradient-1)', color: '#6366f1' },
-    { label: 'Pending Requests', value: '18', trend: '3 urgent', positive: false, icon: <Clock size={22} />, gradient: 'var(--admin-gradient-3)', color: '#f43f5e' },
-    { label: 'Installations', value: '45', trend: '+5%', positive: true, icon: <CheckSquare size={22} />, gradient: 'var(--admin-gradient-4)', color: '#22c55e' },
-    { label: 'Revenue', value: '$48.2k', trend: '+18%', positive: true, icon: <DollarSign size={22} />, gradient: 'var(--admin-gradient-2)', color: '#3b82f6' },
-  ];
-
-  const recentRequests = [
-    { name: 'John Smith', service: 'Residential Solar', date: 'Oct 12, 2026', status: 'pending' },
-    { name: 'Sarah Davis', service: 'Commercial Panel', date: 'Oct 11, 2026', status: 'accepted' },
-    { name: 'Michael Chen', service: 'Battery Storage', date: 'Oct 10, 2026', status: 'completed' },
-    { name: 'Emily White', service: 'Maintenance', date: 'Oct 09, 2026', status: 'pending' },
-  ];
-
-  const quickActions = [
-    { label: 'Schedule', icon: <Calendar size={24} />, color: '#6366f1', path: '/admin/calendar' },
-    { label: 'Edit Home', icon: <Edit size={24} />, color: '#22c55e', path: '/admin/homepage-manager' },
-    { label: 'Add FAQ', icon: <HelpCircle size={24} />, color: '#f59e0b', path: '/admin/faq-manager' },
-    { label: 'Contacts', icon: <Contact size={24} />, color: '#8b5cf6', path: '/admin/contact-manager' },
-  ];
-
-  const upcomingSchedule = [
-    { time: '09:00 AM', client: 'J. Thompson', type: 'Installation', color: '#6366f1' },
-    { time: '11:30 AM', client: 'M. Rodriguez', type: 'Site Survey', color: '#22c55e' },
-    { time: '02:00 PM', client: 'K. Williams', type: 'Maintenance', color: '#f59e0b' },
-  ];
 
   return (
     <motion.div initial="initial" animate="animate" transition={{ staggerChildren: 0.08 }}>

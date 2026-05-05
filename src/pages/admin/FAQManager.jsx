@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
 import { Plus, Edit2, Trash2, GripVertical, Eye, EyeOff, Search } from 'lucide-react';
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
+const initialFaqs = [
+  { id: 1, question: 'How long does installation take?', answer: 'Typically 1-2 days depending on the system size and complexity.', visible: true, category: 'Installation' },
+  { id: 2, question: 'Do you offer financing?', answer: 'Yes, we have multiple financing options available including zero-down payment plans.', visible: true, category: 'Pricing' },
+  { id: 3, question: 'What is the warranty period?', answer: 'We offer a 25-year warranty on panels and 10 years on inverters.', visible: true, category: 'Warranty' },
+  { id: 4, question: 'How much can I save on electricity?', answer: 'Most homeowners save 50-80% on their electricity bills after installing solar panels.', visible: false, category: 'Savings' },
+  { id: 5, question: 'Do solar panels work on cloudy days?', answer: 'Yes, solar panels still generate power on cloudy days, though at reduced efficiency.', visible: true, category: 'General' },
+];
+
 const FAQManager = () => {
-  const [faqs, setFaqs] = useState([
-    { id: 1, question: 'How long does installation take?', answer: 'Typically 1-2 days depending on the system size and complexity.', visible: true, category: 'Installation' },
-    { id: 2, question: 'Do you offer financing?', answer: 'Yes, we have multiple financing options available including zero-down payment plans.', visible: true, category: 'Pricing' },
-    { id: 3, question: 'What is the warranty period?', answer: 'We offer a 25-year warranty on panels and 10 years on inverters.', visible: true, category: 'Warranty' },
-    { id: 4, question: 'How much can I save on electricity?', answer: 'Most homeowners save 50-80% on their electricity bills after installing solar panels.', visible: false, category: 'Savings' },
-    { id: 5, question: 'Do solar panels work on cloudy days?', answer: 'Yes, solar panels still generate power on cloudy days, though at reduced efficiency.', visible: true, category: 'General' },
-  ]);
+  const [faqs, setFaqs] = useState(initialFaqs);
 
   const [searchTerm, setSearchTerm] = useState('');
-  const filtered = faqs.filter(f => f.question.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filtered = useMemo(() => 
+    faqs.filter(f => f.question.toLowerCase().includes(searchTerm.toLowerCase())),
+    [faqs, searchTerm]
+  );
 
   return (
     <motion.div initial="initial" animate="animate" transition={{ staggerChildren: 0.08 }}>

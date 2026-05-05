@@ -14,20 +14,21 @@ import {
   X
 } from 'lucide-react';
 
-const Sidebar = ({ isOpen, closeSidebar }) => {
-  const mainNav = [
-    { path: '/admin/dashboard', icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
-    { path: '/admin/analytics', icon: <BarChart3 size={20} />, label: 'Analytics' },
-    { path: '/admin/requests', icon: <ClipboardList size={20} />, label: 'Requests' },
-    { path: '/admin/calendar', icon: <Calendar size={20} />, label: 'Schedule' },
-  ];
+const mainNav = [
+  { path: '/admin/dashboard', icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
+  { path: '/admin/analytics', icon: <BarChart3 size={20} />, label: 'Analytics' },
+  { path: '/admin/requests', icon: <ClipboardList size={20} />, label: 'Requests' },
+  { path: '/admin/calendar', icon: <Calendar size={20} />, label: 'Schedule' },
+];
 
-  const manageNav = [
-    { path: '/admin/homepage-manager', icon: <Home size={20} />, label: 'Homepage' },
-    { path: '/admin/faq-manager', icon: <HelpCircle size={20} />, label: 'FAQ Manager' },
-    { path: '/admin/contact-manager', icon: <Contact size={20} />, label: 'Contact Info' },
-    { path: '/admin/settings', icon: <Settings size={20} />, label: 'Settings' },
-  ];
+const manageNav = [
+  { path: '/admin/homepage-manager', icon: <Home size={20} />, label: 'Homepage' },
+  { path: '/admin/faq-manager', icon: <HelpCircle size={20} />, label: 'FAQ Manager' },
+  { path: '/admin/contact-manager', icon: <Contact size={20} />, label: 'Contact Info' },
+  { path: '/admin/settings', icon: <Settings size={20} />, label: 'Settings' },
+];
+
+const Sidebar = ({ isOpen, closeSidebar }) => {
 
   return (
     <div className={`admin-sidebar ${isOpen ? 'open' : ''}`}>

@@ -1,41 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const NavBar = () => {
     const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
     const [visible, setVisible] = useState(true);
-    const [isAtTop, setIsAtTop] = useState(true);
+    const [showScrolledStyle, setShowScrolledStyle] = useState(false);
 
     React.useEffect(() => {
         let lastScrollY = window.scrollY;
         let timeoutId = null;
 
+        // Navbar always visible and in original style within this range
+        const HERO_ZONE = 80;
+        // Minimum px of scroll before we react (prevents micro-scroll flicker)
+        const SCROLL_DELTA = 5;
+
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-            setIsAtTop(currentScrollY < 20);
+            const delta = currentScrollY - lastScrollY;
 
-            let action = '';
-            if (currentScrollY < 10) {
-                action = 'top';
+            if (currentScrollY <= HERO_ZONE) {
+                // ── AT TOP / HERO ZONE ──
+                // Always visible, always original flat style, cancel any pending hide
                 setVisible(true);
+                setShowScrolledStyle(false);
                 clearTimeout(timeoutId);
-            } else if (currentScrollY > lastScrollY) {
-                action = 'down';
+            } else if (delta > SCROLL_DELTA) {
+                // ── SCROLLING DOWN (past hero zone) ──
+                // Hide immediately — do NOT show scrolled style (prevents glitch)
                 setVisible(false);
+                setShowScrolledStyle(false);
                 clearTimeout(timeoutId);
-            } else {
-                action = 'up';
+            } else if (delta < -SCROLL_DELTA) {
+                // ── SCROLLING UP (past hero zone) ──
+                // Re-show navbar with glass/scrolled style
                 setVisible(true);
+                setShowScrolledStyle(true);
                 clearTimeout(timeoutId);
-                
                 const waitTime = window.innerWidth > 768 ? 1800 : 1100;
                 timeoutId = setTimeout(() => {
-                    console.log('timeout triggered, hiding');
-                    setVisible(false);
+                    if (window.scrollY > HERO_ZONE) {
+                        setVisible(false);
+                    }
                 }, waitTime);
             }
-            console.log(`Scroll Event - current: ${currentScrollY}, last: ${lastScrollY}, action: ${action}`);
+
             lastScrollY = currentScrollY;
         };
 
@@ -56,7 +66,7 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`navbar-container ${!visible ? 'nav-hidden' : 'nav-visible'} ${!isAtTop ? 'nav-scrolled' : ''}`} style={isAtTop ? { borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '20px', marginBottom: '24px' } : {}}>
+            <div className={`navbar-container ${!visible ? 'nav-hidden' : 'nav-visible'} ${showScrolledStyle ? 'nav-scrolled' : ''}`}>
                 <nav className="flex-row items-center justify-between" style={{ padding: '0 8px' }}>
                     {/* Left Area - Logo */}
                     <div className="flex-row items-center">

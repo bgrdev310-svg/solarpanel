@@ -1,33 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Check, X, Eye, Calendar, User, Phone, Mail, MapPin, Filter, Search, ArrowUpRight } from 'lucide-react';
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
+
+const requests = [
+  { id: 'REQ-001', name: 'John Smith', phone: '(555) 123-4567', email: 'john@example.com', address: '456 Oak St, City', service: 'Residential Solar', date: 'Oct 12, 2026', preferred: 'Oct 20, 2026', status: 'pending' },
+  { id: 'REQ-002', name: 'Sarah Davis', phone: '(555) 987-6543', email: 'sarah@example.com', address: '789 Pine Ave, Town', service: 'Commercial Panel', date: 'Oct 11, 2026', preferred: 'Oct 25, 2026', status: 'pending' },
+  { id: 'REQ-003', name: 'Michael Chen', phone: '(555) 456-7890', email: 'mike@example.com', address: '321 Elm Rd, Village', service: 'Battery Storage', date: 'Oct 10, 2026', preferred: 'Oct 18, 2026', status: 'accepted' },
+  { id: 'REQ-004', name: 'Emily White', phone: '(555) 222-3333', email: 'emily@example.com', address: '555 Cedar Ln, Suburb', service: 'Maintenance', date: 'Oct 09, 2026', preferred: 'Oct 22, 2026', status: 'completed' },
+  { id: 'REQ-005', name: 'James Brown', phone: '(555) 111-4444', email: 'james@example.com', address: '888 Maple Dr', service: 'Residential Solar', date: 'Oct 08, 2026', preferred: 'Oct 30, 2026', status: 'rejected' },
+  { id: 'REQ-006', name: 'Lisa Johnson', phone: '(555) 333-5555', email: 'lisa@example.com', address: '222 Birch Way', service: 'Hybrid System', date: 'Oct 07, 2026', preferred: 'Nov 01, 2026', status: 'pending' },
+];
+
+const filters = ['All', 'Pending', 'Accepted', 'Completed', 'Rejected'];
 
 const RequestsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const requests = [
-    { id: 'REQ-001', name: 'John Smith', phone: '(555) 123-4567', email: 'john@example.com', address: '456 Oak St, City', service: 'Residential Solar', date: 'Oct 12, 2026', preferred: 'Oct 20, 2026', status: 'pending' },
-    { id: 'REQ-002', name: 'Sarah Davis', phone: '(555) 987-6543', email: 'sarah@example.com', address: '789 Pine Ave, Town', service: 'Commercial Panel', date: 'Oct 11, 2026', preferred: 'Oct 25, 2026', status: 'pending' },
-    { id: 'REQ-003', name: 'Michael Chen', phone: '(555) 456-7890', email: 'mike@example.com', address: '321 Elm Rd, Village', service: 'Battery Storage', date: 'Oct 10, 2026', preferred: 'Oct 18, 2026', status: 'accepted' },
-    { id: 'REQ-004', name: 'Emily White', phone: '(555) 222-3333', email: 'emily@example.com', address: '555 Cedar Ln, Suburb', service: 'Maintenance', date: 'Oct 09, 2026', preferred: 'Oct 22, 2026', status: 'completed' },
-    { id: 'REQ-005', name: 'James Brown', phone: '(555) 111-4444', email: 'james@example.com', address: '888 Maple Dr', service: 'Residential Solar', date: 'Oct 08, 2026', preferred: 'Oct 30, 2026', status: 'rejected' },
-    { id: 'REQ-006', name: 'Lisa Johnson', phone: '(555) 333-5555', email: 'lisa@example.com', address: '222 Birch Way', service: 'Hybrid System', date: 'Oct 07, 2026', preferred: 'Nov 01, 2026', status: 'pending' },
-  ];
+  const filtered = useMemo(() => 
+    activeFilter === 'All' ? requests : requests.filter(r => r.status === activeFilter.toLowerCase()),
+    [activeFilter]
+  );
 
-  const filters = ['All', 'Pending', 'Accepted', 'Completed', 'Rejected'];
-  const filtered = activeFilter === 'All' ? requests : requests.filter(r => r.status === activeFilter.toLowerCase());
-
-  const counts = {
+  const counts = useMemo(() => ({
     All: requests.length,
     Pending: requests.filter(r => r.status === 'pending').length,
     Accepted: requests.filter(r => r.status === 'accepted').length,
     Completed: requests.filter(r => r.status === 'completed').length,
     Rejected: requests.filter(r => r.status === 'rejected').length,
-  };
+  }), []);
 
   const handleAccept = (req) => { setSelectedRequest(req); setIsModalOpen(true); };
 

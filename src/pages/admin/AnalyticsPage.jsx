@@ -56,13 +56,21 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
+const kpis = [
+  { label: 'Conversion Rate', value: '68.5%', trend: '+2.4%', positive: true, icon: <TrendingUp size={20} />, color: '#22c55e' },
+  { label: 'Avg. Revenue', value: '$3.8k', trend: '+14%', positive: true, icon: <DollarSign size={20} />, color: '#6366f1' },
+  { label: 'Completion Time', value: '3.2d', trend: '-0.5d', positive: true, icon: <Clock size={20} />, color: '#3b82f6' },
+  { label: 'Active Clients', value: '284', trend: '+12', positive: true, icon: <Users size={20} />, color: '#f59e0b' },
+];
+
+const topRegions = [
+  { name: 'North District', pct: 38, color: '#6366f1' },
+  { name: 'Downtown Area', pct: 28, color: '#22c55e' },
+  { name: 'East Suburbs', pct: 20, color: '#3b82f6' },
+  { name: 'South Valley', pct: 14, color: '#f59e0b' },
+];
+
 const AnalyticsPage = () => {
-  const kpis = [
-    { label: 'Conversion Rate', value: '68.5%', trend: '+2.4%', positive: true, icon: <TrendingUp size={20} />, color: '#22c55e' },
-    { label: 'Avg. Revenue', value: '$3.8k', trend: '+14%', positive: true, icon: <DollarSign size={20} />, color: '#6366f1' },
-    { label: 'Completion Time', value: '3.2d', trend: '-0.5d', positive: true, icon: <Clock size={20} />, color: '#3b82f6' },
-    { label: 'Active Clients', value: '284', trend: '+12', positive: true, icon: <Users size={20} />, color: '#f59e0b' },
-  ];
 
   return (
     <motion.div initial="initial" animate="animate" transition={{ staggerChildren: 0.08 }}>
@@ -179,12 +187,7 @@ const AnalyticsPage = () => {
 
         <div className="admin-card">
           <h2 className="admin-card-title" style={{ marginBottom: 20 }}>Top Performing Regions</h2>
-          {[
-            { name: 'North District', pct: 38, color: '#6366f1' },
-            { name: 'Downtown Area', pct: 28, color: '#22c55e' },
-            { name: 'East Suburbs', pct: 20, color: '#3b82f6' },
-            { name: 'South Valley', pct: 14, color: '#f59e0b' },
-          ].map((r, i) => (
+          {topRegions.map((r, i) => (
             <div key={i} style={{ marginBottom: 18 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{r.name}</span>

@@ -57,7 +57,8 @@ const ProcessStep = ({ stepNumber, title, description, isLast }) => (
                     height: '2px',
                     background: 'linear-gradient(90deg, #00D4FF 0%, rgba(0, 212, 255, 0) 100%)',
                     zIndex: 1,
-                    marginLeft: '-10px'
+                    marginLeft: '0px',
+                    marginRight: '-24px'
                 }} />
             )}
         </div>
@@ -274,7 +275,7 @@ const ServicesPage = () => {
                 }}>
                     <ImpactStat value="-85%" label="Electricity Bills" />
                     <ImpactStat value="Zero" label="Carbon Footprint" />
-                    <ImpactStat value="+4.1%" label="Property Value" />
+                    <ImpactStat value="+6.8%" label="Property Value" />
                     <ImpactStat value="100%" label="Energy Independence" />
                 </div>
             </section>

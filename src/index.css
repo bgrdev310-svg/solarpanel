@@ -1033,9 +1033,10 @@ body {
   .hero-bento {
     height: auto !important;
     aspect-ratio: unset !important;
-    min-height: unset !important;
-    max-width: 350px !important;
-    margin: 0 auto !important;
+    min-height: calc(100vh - 94px) !important;
+    min-height: calc(100dvh - 94px) !important;
+    max-width: 90% !important;
+    margin: 6px auto 0 auto !important;
     background: linear-gradient(135deg, rgba(20, 25, 30, 0.6) 0%, rgba(10, 12, 15, 0.4) 100%) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
@@ -1046,8 +1047,9 @@ body {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding: 30px 20px !important;
-    gap: 20px !important;
+    justify-content: center !important;
+    padding: 16px 20px !important;
+    gap: 14px !important;
     box-shadow: 0 10px 40px -10px rgba(0, 212, 255, 0.1), inset 0 0 20px rgba(0, 212, 255, 0.03) !important;
   }
 
@@ -1074,6 +1076,7 @@ body {
     line-height: 1.2 !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
+    text-align: center !important;
   }
   
   .hero-title-top {
@@ -1125,7 +1128,13 @@ body {
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
-    padding: 0 !important;
+    padding: 14px 20px !important;
+    background: rgba(15, 16, 17, 0.5) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 100px !important;
+    box-sizing: border-box !important;
   }
 
   .hero-status-pill > .flex-row {

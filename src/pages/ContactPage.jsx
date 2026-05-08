@@ -115,6 +115,78 @@ const InstagramIcon = () => (
 const ContactPage = () => {
     // Form state handling for glowing inputs
     const [focusedInput, setFocusedInput] = useState(null);
+    const [isLocating, setIsLocating] = useState(false);
+    const [locationStatus, setLocationStatus] = useState('');
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        phone: '',
+        zip: '',
+        propertyType: '',
+        preferredContact: '',
+        timeline: '',
+        monthlyBill: '',
+        message: '',
+        mapLink: '',
+        services: [],
+    });
+
+    const serviceOptions = [
+        'Solar Panel Installation',
+        'Commercial Solar Panel Services',
+        'Roof Inspection',
+        'EV Charging Station Installation',
+        'Maintenance & Cleaning',
+        'Roof Installation and Repair',
+    ];
+
+    const updateField = (field, value) => {
+        setFormData((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const toggleService = (service) => {
+        setFormData((prev) => ({
+            ...prev,
+            services: prev.services.includes(service)
+                ? prev.services.filter((item) => item !== service)
+                : [...prev.services, service],
+        }));
+    };
+
+    const detectLocation = () => {
+        if (!navigator.geolocation) {
+            setLocationStatus('Geolocation is not supported on this device/browser.');
+            return;
+        }
+
+        setIsLocating(true);
+        setLocationStatus('Detecting your location...');
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                const generatedLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+                setFormData((prev) => ({ ...prev, mapLink: generatedLink }));
+                setLocationStatus('Location added successfully.');
+                setIsLocating(false);
+            },
+            (error) => {
+                const geoErrors = {
+                    1: 'Location access was denied. You can still paste a Google Maps link manually.',
+                    2: 'Location unavailable right now. Please try again in a few seconds.',
+                    3: 'Location request timed out. Please try again.',
+                };
+                setLocationStatus(geoErrors[error.code] || 'Could not detect location right now.');
+                setIsLocating(false);
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setLocationStatus('Request captured. Connect this form to your backend/email API to send it live.');
+    };
 
     const inputStyle = (id) => ({
         width: '100%',
@@ -131,7 +203,7 @@ const ContactPage = () => {
     });
 
     return (
-        <section style={{
+        <section className="contact-page-root" style={{
             padding: '20px 40px 80px 40px',
             minHeight: '100vh',
             display: 'flex',
@@ -184,7 +256,7 @@ const ContactPage = () => {
                 </div>
 
                 {/* Form Section */}
-                <div className="premium-glass-card" style={{
+                <div className="premium-glass-card request-card" style={{
                     padding: '48px',
                     borderRadius: '24px',
                     background: 'linear-gradient(145deg, rgba(20, 25, 30, 0.6) 0%, rgba(10, 15, 20, 0.8) 100%)',
@@ -198,12 +270,14 @@ const ContactPage = () => {
                         REQUEST A CONSULTATION
                     </h2>
 
-                    <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                        <div className="request-grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>FULL NAME</label>
                                 <input type="text" placeholder="John Doe"
+                                    value={formData.fullName}
                                     style={inputStyle('name')}
+                                    onChange={(e) => updateField('fullName', e.target.value)}
                                     onFocus={() => setFocusedInput('name')}
                                     onBlur={() => setFocusedInput(null)}
                                 />
@@ -211,18 +285,22 @@ const ContactPage = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>EMAIL ADDRESS</label>
                                 <input type="email" placeholder="john@example.com"
+                                    value={formData.email}
                                     style={inputStyle('email')}
+                                    onChange={(e) => updateField('email', e.target.value)}
                                     onFocus={() => setFocusedInput('email')}
                                     onBlur={() => setFocusedInput(null)}
                                 />
                             </div>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                        <div className="request-grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>PHONE NUMBER</label>
                                 <input type="tel" placeholder="(555) 000-0000"
+                                    value={formData.phone}
                                     style={inputStyle('phone')}
+                                    onChange={(e) => updateField('phone', e.target.value)}
                                     onFocus={() => setFocusedInput('phone')}
                                     onBlur={() => setFocusedInput(null)}
                                 />
@@ -230,11 +308,158 @@ const ContactPage = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>ZIP CODE</label>
                                 <input type="text" placeholder="78701"
+                                    value={formData.zip}
                                     style={inputStyle('zip')}
+                                    onChange={(e) => updateField('zip', e.target.value)}
                                     onFocus={() => setFocusedInput('zip')}
                                     onBlur={() => setFocusedInput(null)}
                                 />
                             </div>
+                        </div>
+
+                        <div className="request-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '20px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>PROPERTY TYPE</label>
+                                <select
+                                    value={formData.propertyType}
+                                    style={inputStyle('propertyType')}
+                                    onChange={(e) => updateField('propertyType', e.target.value)}
+                                    onFocus={() => setFocusedInput('propertyType')}
+                                    onBlur={() => setFocusedInput(null)}
+                                >
+                                    <option value="">Select type</option>
+                                    <option value="home">Home</option>
+                                    <option value="villa">Villa</option>
+                                    <option value="apartment">Apartment Building</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="industrial">Industrial</option>
+                                </select>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>PREFERRED CONTACT</label>
+                                <select
+                                    value={formData.preferredContact}
+                                    style={inputStyle('preferredContact')}
+                                    onChange={(e) => updateField('preferredContact', e.target.value)}
+                                    onFocus={() => setFocusedInput('preferredContact')}
+                                    onBlur={() => setFocusedInput(null)}
+                                >
+                                    <option value="">Select method</option>
+                                    <option value="phone">Phone Call</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="email">Email</option>
+                                </select>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>PROJECT TIMELINE</label>
+                                <select
+                                    value={formData.timeline}
+                                    style={inputStyle('timeline')}
+                                    onChange={(e) => updateField('timeline', e.target.value)}
+                                    onFocus={() => setFocusedInput('timeline')}
+                                    onBlur={() => setFocusedInput(null)}
+                                >
+                                    <option value="">Select timeline</option>
+                                    <option value="urgent">ASAP (0-2 weeks)</option>
+                                    <option value="month">This month</option>
+                                    <option value="quarter">1-3 months</option>
+                                    <option value="planning">Just planning</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
+                                REQUIRED SERVICES (SELECT ONE OR MORE)
+                            </label>
+                            <div className="service-pills-grid" style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                                gap: '10px',
+                            }}>
+                                {serviceOptions.map((service) => {
+                                    const selected = formData.services.includes(service);
+                                    return (
+                                        <button
+                                            key={service}
+                                            type="button"
+                                            onClick={() => toggleService(service)}
+                                            style={{
+                                                textAlign: 'left',
+                                                padding: '12px 14px',
+                                                borderRadius: '12px',
+                                                border: selected ? '1px solid rgba(0,242,255,0.75)' : '1px solid rgba(255,255,255,0.1)',
+                                                background: selected ? 'rgba(0,242,255,0.12)' : 'rgba(255,255,255,0.02)',
+                                                color: selected ? '#bff8ff' : 'rgba(255,255,255,0.88)',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.25s ease',
+                                                fontSize: '14px',
+                                                fontWeight: 500,
+                                            }}
+                                        >
+                                            {service}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="request-grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
+                                    MONTHLY ELECTRIC BILL (OPTIONAL)
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g. $120 / month"
+                                    value={formData.monthlyBill}
+                                    style={inputStyle('monthlyBill')}
+                                    onChange={(e) => updateField('monthlyBill', e.target.value)}
+                                    onFocus={() => setFocusedInput('monthlyBill')}
+                                    onBlur={() => setFocusedInput(null)}
+                                />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ color: 'var(--element-dim)', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
+                                    GOOGLE MAPS LINK (OPTIONAL)
+                                </label>
+                                <input
+                                    type="url"
+                                    placeholder="https://maps.google.com/..."
+                                    value={formData.mapLink}
+                                    style={inputStyle('mapLink')}
+                                    onChange={(e) => updateField('mapLink', e.target.value)}
+                                    onFocus={() => setFocusedInput('mapLink')}
+                                    onBlur={() => setFocusedInput(null)}
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            <button
+                                type="button"
+                                onClick={detectLocation}
+                                disabled={isLocating}
+                                style={{
+                                    alignSelf: 'flex-start',
+                                    padding: '10px 14px',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(0,242,255,0.35)',
+                                    background: 'rgba(0,242,255,0.08)',
+                                    color: '#8ff3ff',
+                                    cursor: isLocating ? 'not-allowed' : 'pointer',
+                                    opacity: isLocating ? 0.7 : 1,
+                                    fontWeight: 600,
+                                    fontSize: '13px',
+                                }}
+                            >
+                                {isLocating ? 'Detecting location...' : 'Use my current location (GPS)'}
+                            </button>
+                            {locationStatus && (
+                                <p style={{ margin: 0, fontSize: '12px', color: 'var(--element-dim)' }}>
+                                    {locationStatus}
+                                </p>
+                            )}
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }}>
@@ -242,7 +467,9 @@ const ContactPage = () => {
                             <textarea
                                 placeholder="Tell us about your home and energy goals..."
                                 rows="4"
+                                value={formData.message}
                                 style={{ ...inputStyle('message'), resize: 'vertical' }}
+                                onChange={(e) => updateField('message', e.target.value)}
                                 onFocus={() => setFocusedInput('message')}
                                 onBlur={() => setFocusedInput(null)}
                             />
@@ -257,7 +484,7 @@ const ContactPage = () => {
                             justifyContent: 'center',
                             alignItems: 'center',
                             gap: '12px'
-                        }} type="button">
+                        }} type="submit">
                             <span>SEND MESSAGE</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -267,6 +494,37 @@ const ContactPage = () => {
                     </form>
                 </div>
             </div>
+            <style>{`
+                .request-card select,
+                .request-card input,
+                .request-card textarea {
+                    appearance: none;
+                }
+
+                @media (max-width: 900px) {
+                    .contact-page-root {
+                        padding: 16px 18px 56px 18px !important;
+                    }
+
+                    .request-card {
+                        padding: 30px 20px !important;
+                        border-radius: 18px !important;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .request-grid-2,
+                    .request-grid-3,
+                    .service-pills-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 14px !important;
+                    }
+
+                    .request-card h2 {
+                        font-size: 20px !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };

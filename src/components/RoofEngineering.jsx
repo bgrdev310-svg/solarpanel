@@ -54,7 +54,7 @@ const RoofEngineering = () => {
                     <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                         <Checkmark />
                         <div>
-                            <span style={{ fontSize: '16px', color: '#fff', fontWeight: 600, display: 'block', marginBottom: '4px' }}>AI-Powered Roof Mapping</span>
+                            <span style={{ fontSize: '16px', color: '#fff', fontWeight: 600, display: 'block', marginBottom: '4px' }}>Roof Mapping</span>
                             <span style={{ fontSize: '14px', color: 'var(--element-dim)' }}>We use satellite data to find the highest-efficiency angles for your specific roof.</span>
                         </div>
                     </div>

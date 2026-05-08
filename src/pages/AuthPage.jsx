@@ -107,39 +107,29 @@ const AuthPage = () => {
       {/* Particles overlay */}
       <div className="auth-dots">{[...Array(6)].map((_, i) => <div key={i} className="auth-dot" />)}</div>
 
-      {/* ═══ LEFT — HERO CONTENT ═══ */}
-      <div className="auth-hero">
-        <div className="auth-hero-grid" />
-        <div className="auth-hero-content">
-          <div className="auth-hero-logo">
-            <div className="auth-hero-logo-icon">
-              <Sun />
+      <div className="auth-layout">
+        {/* ═══ LEFT — HERO CONTENT ═══ */}
+        <div className="auth-hero">
+          <div className="auth-hero-grid" />
+          <div className="auth-hero-content">
+            <div className="auth-hero-logo">
+              <div className="auth-hero-logo-icon">
+                <Sun />
+              </div>
+              SOLAR <b>PANEL</b>
             </div>
-            SOLAR <b>PANEL</b>
+            <h2 className="auth-hero-tagline">
+              Powering a<br />Sustainable<br /><span className="highlight">Future</span>
+            </h2>
+            <p className="auth-hero-sub">
+              Monitor, manage, and maximize your solar energy production with real-time insights and intelligent analytics.
+            </p>
           </div>
-          <h2 className="auth-hero-tagline">
-            Powering a<br />Sustainable<br /><span className="highlight">Future</span>
-          </h2>
-          <p className="auth-hero-sub">
-            Monitor, manage, and maximize your solar energy production with real-time insights and intelligent analytics.
-          </p>
         </div>
-      </div>
 
-      {/* Mobile brand */}
-      <div className="auth-mob-brand">
-        <div className="auth-hero-logo">
-          <div className="auth-hero-logo-icon">
-            <Sun size={20} />
-          </div>
-          SOLAR <b>PANEL</b>
-        </div>
-        <p className="auth-hero-sub">Intelligent solar energy platform</p>
-      </div>
-
-      {/* ═══ RIGHT — FORM ═══ */}
-      <div className="auth-form-side">
-        <div className="auth-card">
+        {/* ═══ RIGHT — FORM ═══ */}
+        <div className="auth-form-side">
+          <div className="auth-card">
           <div className="auth-head">
             <h1 className="auth-title">{mode === 'login' ? 'Welcome Back' : 'Create Account'}</h1>
             <p className="auth-subtitle">{mode === 'login' ? 'Sign in to continue your solar journey' : 'Start your solar journey today'}</p>
@@ -282,7 +272,19 @@ const AuthPage = () => {
               ? <>Don't have an account? <button onClick={() => go('signup')}>Create one</button></>
               : <>Already have an account? <button onClick={() => go('login')}>Sign in</button></>}
           </div>
+          </div>
         </div>
+      </div>
+
+      {/* Mobile brand */}
+      <div className="auth-mob-brand">
+        <div className="auth-hero-logo">
+          <div className="auth-hero-logo-icon">
+            <Sun size={20} />
+          </div>
+          SOLAR <b>PANEL</b>
+        </div>
+        <p className="auth-hero-sub">Intelligent solar energy platform</p>
       </div>
     </div>
   );

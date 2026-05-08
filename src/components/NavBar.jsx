@@ -1,8 +1,9 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [visible, setVisible] = useState(true);
     const [showScrolledStyle, setShowScrolledStyle] = useState(false);
@@ -86,9 +87,15 @@ const NavBar = () => {
 
                     {/* Right Actions Area - Hidden on mobile */}
                     <div className="nav-actions-desktop flex-row items-center" style={{ gap: '16px' }}>
-                        <div className="hover-lift flex-row items-center justify-center" style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--panel-dark)', border: '1px solid var(--panel-border)', overflow: 'hidden', padding: '8px' }}>
-                            <img src="/eco-house.png" alt="Eco House" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                        </div>
+                        <Link
+                            to="/request-status"
+                            className="hover-lift flex-row items-center justify-center nav-request-tracker-link"
+                            aria-label="Track your consultation request"
+                            title="Track request"
+                            style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--panel-dark)', border: '1px solid var(--panel-border)', overflow: 'hidden', padding: '8px', textDecoration: 'none' }}
+                        >
+                            <img src="/eco-house.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                        </Link>
                         <div className="hover-lift flex-row items-center justify-center" style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--panel-dark)', border: '1px solid var(--panel-border)', overflow: 'hidden', padding: '6px' }}>
                             <img src="/sun.png" alt="Sun Settings" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                         </div>
@@ -285,9 +292,16 @@ const NavBar = () => {
                     display: 'flex', gap: '14px', paddingTop: '20px',
                     borderTop: '1px solid rgba(255,255,255,0.06)', justifyContent: 'center'
                 }}>
-                    <div className="flex-row items-center justify-center" style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--panel-dark)', border: '1px solid var(--panel-border)', overflow: 'hidden', padding: '10px' }}>
-                        <img src="/eco-house.png" alt="Eco House" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                    </div>
+                    <button
+                        type="button"
+                        onClick={() => { navigate('/request-status'); closeMenu(); }}
+                        className="flex-row items-center justify-center nav-request-tracker-link"
+                        aria-label="Track your consultation request"
+                        title="Track request"
+                        style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--panel-dark)', border: '1px solid var(--panel-border)', overflow: 'hidden', padding: '10px', cursor: 'pointer' }}
+                    >
+                        <img src="/eco-house.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    </button>
                     <div className="flex-row items-center justify-center" style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--panel-dark)', border: '1px solid var(--panel-border)', overflow: 'hidden', padding: '8px' }}>
                         <img src="/sun.png" alt="Sun Settings" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>

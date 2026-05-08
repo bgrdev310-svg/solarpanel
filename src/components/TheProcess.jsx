@@ -43,7 +43,7 @@ const TheProcess = () => {
             <style>{`
                 .process-wrapper-outer {
                     position: relative;
-                    padding: 120px 20px;
+                    padding: 80px 20px;
                     max-width: 1100px; /* Tighter layout for perfect proportions */
                     margin: 0 auto;
                 }

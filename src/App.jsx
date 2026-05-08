@@ -11,6 +11,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const RequestStatusPage = lazy(() => import('./pages/RequestStatusPage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
 
 // Admin Pages
@@ -52,6 +53,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/AboutPage" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
+            <Route path="/request-status" element={<RequestStatusPage />} />
           </Route>
 
           {/* Admin Routes */}
